@@ -88,14 +88,14 @@
             
               <li class="tag-list-container">
                 <a href="javascript:;">标签</a>
-                
+                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-html/">js html</a><span class="tag-list-count">1</span></li></ul>
               </li>
             
           
             
               <li class="archive-list-container">
                 <a href="javascript:;">归档</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">2</span></li></ul>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">5</span></li></ul>
               </li>
             
           
@@ -130,6 +130,125 @@
         <div style="max-width: 1000px">
       
           
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2019/04/28/ApproachingReactThree/">
+  走近React的第三天
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2019/04/28/ApproachingReactThree/"><span class="article-date">
+  2019-04-28
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2019/04/28/ApproachingReactTwo/">
+  走近React的第二天
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2019/04/28/ApproachingReactTwo/"><span class="article-date">
+  2019-04-28
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2019/04/28/ApproachingReactOne/">
+  走近React的第一天（一个简单的例子）
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2019/04/28/ApproachingReactOne/"><span class="article-date">
+  2019-04-28
+</span>
+</a>
+        
+
+        
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js-html/">js html</a></li></ul>
+	</span>
+
+
+      </div>
+      <div class="article-entry">
+        
+          <h1 id="简单TodoList的实现"><a href="#简单TodoList的实现" class="headerlink" title="简单TodoList的实现"></a>简单TodoList的实现</h1><p>今天是我们学习React基本实现的第一天，首先我们先用一个最基础的ToDoList的小demo来撬开React的大门。</p>
+<p><strong>先上效果图</strong><br><img src="/2019/04/28/ApproachingReactOne/toDoList.gif" alt="显示效果图"></p>
+<p>看到这里大部分有一定基础的前端coder实现这个效果都是顺手拈来。</p>
+<p><strong>html部分</strong></p>
+<p>对页面结构添加一定的 HTML 结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;root&quot;&gt;</span><br><span class="line">    &lt;button id=&apos;add&apos;&gt;增加一条&lt;/button&gt;</span><br><span class="line">    &lt;button id=&apos;reduce&apos;&gt;减少一条&lt;/button&gt;</span><br><span class="line">    &lt;ul id=&apos;list&apos; &gt;&lt;/ul&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>js部分</strong></p>
+<p>加入以下JavaScript的行为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const UL=document.getElementById(&apos;list&apos;);</span><br><span class="line">const add= document.getElementById(&apos;add&apos;);</span><br><span class="line">const reduce= document.getElementById(&apos;reduce&apos;);</span><br><span class="line">let num=0;</span><br><span class="line">let Arr=[];</span><br><span class="line">add.addEventListener(&apos;click&apos;,()=&gt;&#123;</span><br><span class="line">    let OL=document.createElement(&quot;ol&quot;);</span><br><span class="line">    let TEXT=document.createTextNode(`这里是我第$&#123;num+1&#125;条需要做的`);</span><br><span class="line">    OL.appendChild(TEXT);</span><br><span class="line">    UL.appendChild(OL)</span><br><span class="line">    num++;     </span><br><span class="line">&#125;)</span><br><span class="line">reduce.addEventListener(&apos;click&apos;,()=&gt;&#123;    </span><br><span class="line">    if(UL.children.length)&#123;</span><br><span class="line">        UL.removeChild(UL.children[UL.children.length-1]);</span><br><span class="line">        num--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>功能和实现都很简单，按钮已经可以简单的实现List的增加和减少了。</p>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
 
   
   
