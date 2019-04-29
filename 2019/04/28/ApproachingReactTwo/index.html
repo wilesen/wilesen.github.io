@@ -8,21 +8,23 @@
 
 <title>
   
-    走近React的第二天
+    走近React的第二天（模拟render与setState）
   
 </title>
 
-<meta name="description" content="一个热爱生活的前端Coder">
+<meta name="description" content="模拟实现render以及setState方法今天主要目标是模拟实现React的render以及setState更新state后刷新Dom的实现 目标 模拟实现React的render方法生成Dom元素 绑定Dom元素上的操作 实现setState操作后刷新Dom元素  先上效果图  (ps： 每条li之间显示的 ，是因为对数组元素调用toString方法后导致的)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="走近React的第二天">
+<meta property="og:title" content="走近React的第二天（模拟render与setState）">
 <meta property="og:url" content="http://yoursite.com/2019/04/28/ApproachingReactTwo/index.html">
 <meta property="og:site_name" content="人望山，鱼窥荷">
-<meta property="og:description" content="一个热爱生活的前端Coder">
+<meta property="og:description" content="模拟实现render以及setState方法今天主要目标是模拟实现React的render以及setState更新state后刷新Dom的实现 目标 模拟实现React的render方法生成Dom元素 绑定Dom元素上的操作 实现setState操作后刷新Dom元素  先上效果图  (ps： 每条li之间显示的 ，是因为对数组元素调用toString方法后导致的)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-28T09:47:08.392Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/28/ApproachingReactTwo/todoList2.gif">
+<meta property="og:updated_time" content="2019-04-29T06:15:45.165Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="走近React的第二天">
-<meta name="twitter:description" content="一个热爱生活的前端Coder">
+<meta name="twitter:title" content="走近React的第二天（模拟render与setState）">
+<meta name="twitter:description" content="模拟实现render以及setState方法今天主要目标是模拟实现React的render以及setState更新state后刷新Dom的实现 目标 模拟实现React的render方法生成Dom元素 绑定Dom元素上的操作 实现setState操作后刷新Dom元素  先上效果图  (ps： 每条li之间显示的 ，是因为对数组元素调用toString方法后导致的)">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/28/ApproachingReactTwo/todoList2.gif">
 
 
   <link rel="alternative" href="/atom.xml" title="人望山，鱼窥荷" type="application/atom+xml">
@@ -133,7 +135,7 @@
           <article id="post-ApproachingReactTwo" class="article article-type-post">
   
     <h1 class="article-header">
-      走近React的第二天
+      走近React的第二天（模拟render与setState）
     </h1>
   
   
@@ -149,7 +151,14 @@
 
   </div>
   <div class="article-entry">
-    
+    <h1 id="模拟实现render以及setState方法"><a href="#模拟实现render以及setState方法" class="headerlink" title="模拟实现render以及setState方法"></a>模拟实现render以及setState方法</h1><p>今天主要目标是模拟实现React的render以及setState更新state后刷新Dom的实现</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
+<li>模拟实现React的render方法生成Dom元素</li>
+<li>绑定Dom元素上的操作</li>
+<li>实现setState操作后刷新Dom元素</li>
+</ul>
+<p><strong><center>先上效果图 </center></strong><br><img src="/2019/04/28/ApproachingReactTwo/todoList2.gif" alt="显示效果图"></p>
+<center style="color:gray">(ps： 每条li之间显示的<span style="color:red"><strong> ，</strong></span>是因为对数组元素调用toString方法后导致的)</center>
   </div>
   <footer class="article-footer">
     

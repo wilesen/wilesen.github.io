@@ -8,23 +8,23 @@
 
 <title>
   
-    走近React的第一天（一个简单的例子）
+    走近React的第一天（一个简单的TodoList例子）
   
 </title>
 
-<meta name="description" content="简单TodoList的实现今天是我们学习React基本实现的第一天，首先我们先用一个最基础的ToDoList的小demo来撬开React的大门。 先上效果图 看到这里大部分有一定基础的前端coder实现这个效果都是顺手拈来。 html部分 对页面结构添加一定的 HTML 结构 12345&amp;lt;div id=&amp;quot;root&amp;quot;&amp;gt;    &amp;lt;button id=&amp;apos;a">
+<meta name="description" content="走近React的第一天（一个简单的TodoList例子）前言React.js是一个专注于构建视图层的JavaScript库，他可以非常轻松地创建用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考React中文网,这里就不过多的赘述了。 目标">
 <meta name="keywords" content="js html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="走近React的第一天（一个简单的例子）">
+<meta property="og:title" content="走近React的第一天（一个简单的TodoList例子）">
 <meta property="og:url" content="http://yoursite.com/2019/04/28/ApproachingReactOne/index.html">
 <meta property="og:site_name" content="人望山，鱼窥荷">
-<meta property="og:description" content="简单TodoList的实现今天是我们学习React基本实现的第一天，首先我们先用一个最基础的ToDoList的小demo来撬开React的大门。 先上效果图 看到这里大部分有一定基础的前端coder实现这个效果都是顺手拈来。 html部分 对页面结构添加一定的 HTML 结构 12345&amp;lt;div id=&amp;quot;root&amp;quot;&amp;gt;    &amp;lt;button id=&amp;apos;a">
+<meta property="og:description" content="走近React的第一天（一个简单的TodoList例子）前言React.js是一个专注于构建视图层的JavaScript库，他可以非常轻松地创建用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考React中文网,这里就不过多的赘述了。 目标">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/04/28/ApproachingReactOne/toDoList.gif">
-<meta property="og:updated_time" content="2019-04-28T10:50:07.424Z">
+<meta property="og:updated_time" content="2019-04-29T06:31:58.098Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="走近React的第一天（一个简单的例子）">
-<meta name="twitter:description" content="简单TodoList的实现今天是我们学习React基本实现的第一天，首先我们先用一个最基础的ToDoList的小demo来撬开React的大门。 先上效果图 看到这里大部分有一定基础的前端coder实现这个效果都是顺手拈来。 html部分 对页面结构添加一定的 HTML 结构 12345&amp;lt;div id=&amp;quot;root&amp;quot;&amp;gt;    &amp;lt;button id=&amp;apos;a">
+<meta name="twitter:title" content="走近React的第一天（一个简单的TodoList例子）">
+<meta name="twitter:description" content="走近React的第一天（一个简单的TodoList例子）前言React.js是一个专注于构建视图层的JavaScript库，他可以非常轻松地创建用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考React中文网,这里就不过多的赘述了。 目标">
 <meta name="twitter:image" content="http://yoursite.com/2019/04/28/ApproachingReactOne/toDoList.gif">
 
 
@@ -136,7 +136,7 @@
           <article id="post-ApproachingReactOne" class="article article-type-post">
   
     <h1 class="article-header">
-      走近React的第一天（一个简单的例子）
+      走近React的第一天（一个简单的TodoList例子）
     </h1>
   
   
@@ -156,9 +156,10 @@
 
   </div>
   <div class="article-entry">
-    <h1 id="简单TodoList的实现"><a href="#简单TodoList的实现" class="headerlink" title="简单TodoList的实现"></a>简单TodoList的实现</h1><p>今天是我们学习React基本实现的第一天，首先我们先用一个最基础的ToDoList的小demo来撬开React的大门。</p>
-<p><strong>先上效果图</strong><br><img src="/2019/04/28/ApproachingReactOne/toDoList.gif" alt="显示效果图"></p>
-<p>看到这里大部分有一定基础的前端coder实现这个效果都是顺手拈来。</p>
+    <h1 id="走近React的第一天（一个简单的TodoList例子）"><a href="#走近React的第一天（一个简单的TodoList例子）" class="headerlink" title="走近React的第一天（一个简单的TodoList例子）"></a>走近React的第一天（一个简单的TodoList例子）</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>React.js是一个专注于构建视图层的JavaScript库，他可以非常轻松地创建用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考<a href="https://react.docschina.org/" target="_blank" rel="noopener">React中文网</a>,这里就不过多的赘述了。</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>实现一个动态增减的列表的功能</p>
+<p><strong><center>先上效果图</center></strong><br><img src="/2019/04/28/ApproachingReactOne/toDoList.gif" alt="显示效果图"></p>
+<p>我相信有一定基础的前端coder对于实现这个效果都是顺手拈来的。</p>
 <p><strong>html部分</strong></p>
 <p>对页面结构添加一定的 HTML 结构</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;root&quot;&gt;</span><br><span class="line">    &lt;button id=&apos;add&apos;&gt;增加一条&lt;/button&gt;</span><br><span class="line">    &lt;button id=&apos;reduce&apos;&gt;减少一条&lt;/button&gt;</span><br><span class="line">    &lt;ul id=&apos;list&apos; &gt;&lt;/ul&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
@@ -166,6 +167,7 @@
 <p>加入以下JavaScript的行为</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const UL=document.getElementById(&apos;list&apos;);</span><br><span class="line">const add= document.getElementById(&apos;add&apos;);</span><br><span class="line">const reduce= document.getElementById(&apos;reduce&apos;);</span><br><span class="line">let num=0;</span><br><span class="line">let Arr=[];</span><br><span class="line">add.addEventListener(&apos;click&apos;,()=&gt;&#123;</span><br><span class="line">    let OL=document.createElement(&quot;ol&quot;);</span><br><span class="line">    let TEXT=document.createTextNode(`这里是我第$&#123;num+1&#125;条需要做的`);</span><br><span class="line">    OL.appendChild(TEXT);</span><br><span class="line">    UL.appendChild(OL)</span><br><span class="line">    num++;     </span><br><span class="line">&#125;)</span><br><span class="line">reduce.addEventListener(&apos;click&apos;,()=&gt;&#123;    </span><br><span class="line">    if(UL.children.length)&#123;</span><br><span class="line">        UL.removeChild(UL.children[UL.children.length-1]);</span><br><span class="line">        num--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>功能和实现都很简单，按钮已经可以简单的实现List的增加和减少了。</p>
+<p>毫无疑问这样的代码可谓是言简意赅，很容易就能看懂每一段代码的具体目的，但是这样的代码在开发过程中的效率是很低的，没有什么复用性。如果这个时候PM过来找你说，’咱们现在不想做ToDoList了，我们来做一个点赞评价模块‘，那么很不幸这块代码可能就需要全部推翻重写，那么我们能不能去把这些代码去抽离一下呢？</p>
 
   </div>
   <footer class="article-footer">
