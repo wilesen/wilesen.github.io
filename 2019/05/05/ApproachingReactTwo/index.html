@@ -8,21 +8,21 @@
 
 <title>
   
-    模拟实现React的render以及setState方法
+    模拟实现render&amp;&amp;setState方法
   
 </title>
 
 <meta name="description" content="模拟实现React的render以及setState方法这一章的主要目标是模拟实现React的render以及setState更新state后刷新DOM的实现，看到这里你需要一点点ES6的基础，如果这里你还不是很会，推荐一下阮一峰老师的ES6教程写的特别好。 目标 模拟实现React的render方法动态的生成Dom元素  绑定Dom节点上的函数  实现setState操作并且更新数据后运行Ren">
 <meta property="og:type" content="article">
-<meta property="og:title" content="模拟实现React的render以及setState方法">
+<meta property="og:title" content="模拟实现render&amp;&amp;setState方法">
 <meta property="og:url" content="http://yoursite.com/2019/05/05/ApproachingReactTwo/index.html">
 <meta property="og:site_name" content="人望山，鱼窥荷">
 <meta property="og:description" content="模拟实现React的render以及setState方法这一章的主要目标是模拟实现React的render以及setState更新state后刷新DOM的实现，看到这里你需要一点点ES6的基础，如果这里你还不是很会，推荐一下阮一峰老师的ES6教程写的特别好。 目标 模拟实现React的render方法动态的生成Dom元素  绑定Dom节点上的函数  实现setState操作并且更新数据后运行Ren">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/05/05/ApproachingReactTwo/todoList2.gif">
-<meta property="og:updated_time" content="2019-05-05T09:20:35.713Z">
+<meta property="og:updated_time" content="2019-05-06T02:01:09.358Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="模拟实现React的render以及setState方法">
+<meta name="twitter:title" content="模拟实现render&amp;&amp;setState方法">
 <meta name="twitter:description" content="模拟实现React的render以及setState方法这一章的主要目标是模拟实现React的render以及setState更新state后刷新DOM的实现，看到这里你需要一点点ES6的基础，如果这里你还不是很会，推荐一下阮一峰老师的ES6教程写的特别好。 目标 模拟实现React的render方法动态的生成Dom元素  绑定Dom节点上的函数  实现setState操作并且更新数据后运行Ren">
 <meta name="twitter:image" content="http://yoursite.com/2019/05/05/ApproachingReactTwo/todoList2.gif">
 
@@ -61,7 +61,7 @@
     <div class="info">
       <div class="content">
         
-          <div class="description">喜欢唱、跳、Raph和篮球的前端Coder</div>
+          <div class="description">喜欢唱、跳、Rap和篮球的前端Coder</div>
         
         
           <div class="author">wilesen</div>
@@ -135,7 +135,7 @@
           <article id="post-ApproachingReactTwo" class="article article-type-post">
   
     <h1 class="article-header">
-      模拟实现React的render以及setState方法
+      模拟实现render&&setState方法
     </h1>
   
   
@@ -182,7 +182,7 @@
 <h3 id="完整的代码"><a href="#完整的代码" class="headerlink" title="完整的代码"></a><strong>完整的代码</strong></h3><p>html部分：</p>
 <figure class="highlight plain"><figcaption><span>block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <p>JavaScript部分：<br><figure class="highlight plain"><figcaption><span>block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">function mountNode(counter, root)&#123;</span><br><span class="line">            (counter.$container = root).appendChild(counter.render());</span><br><span class="line">        &#125;</span><br><span class="line">        class  Counter&#123;</span><br><span class="line">            constructor()&#123;</span><br><span class="line">                this.state=&#123;</span><br><span class="line">                    dateList:[]</span><br><span class="line">                &#125;</span><br><span class="line">                this.add=this.add.bind(this);</span><br><span class="line">                this.reduce=this.reduce.bind(this);</span><br><span class="line">            &#125;</span><br><span class="line">            add()&#123;</span><br><span class="line">                let newDateList=[...this.state.dateList]</span><br><span class="line">                newDateList.push(new Date().toString());</span><br><span class="line">                this.setState(&#123;dateList:newDateList&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            reduce()&#123;</span><br><span class="line">                let newDateList=[...this.state.dateList]</span><br><span class="line">                newDateList.pop();</span><br><span class="line">                this.setState(&#123;dateList:newDateList&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            bindEvent(el)&#123;</span><br><span class="line">                el.getAttributeNames().forEach(name =&gt; &#123;</span><br><span class="line">                    const matches=name.match(/^on([a-z]+)$/);</span><br><span class="line">                    matches &amp;&amp; el.addEventListener(matches[1], new Function(&apos;return &apos; + el.getAttribute(name)).bind(this)(),false);</span><br><span class="line">                &#125;);</span><br><span class="line">                Array.from(el.children).forEach(el=&gt;this.bindEvent(el));</span><br><span class="line">                return el;</span><br><span class="line">            &#125;</span><br><span class="line">            setState(nextState)&#123;</span><br><span class="line">                this.state=&#123;...this.state,...nextState&#125;;</span><br><span class="line">                this.render();</span><br><span class="line">            &#125;</span><br><span class="line">            createDOM(htmlDom)&#123;</span><br><span class="line">                const fragment = document.createElement(&apos;div&apos;);</span><br><span class="line">                fragment.innerHTML = htmlDom; </span><br><span class="line">                return this.bindEvent(fragment.firstElementChild);</span><br><span class="line">            &#125;</span><br><span class="line">            render()&#123;</span><br><span class="line">                const &#123;dateList&#125;=this.state;</span><br><span class="line">                const oldElement=this.$element;</span><br><span class="line">                let color=&apos;blue&apos;;</span><br><span class="line">                if (dateList.length &gt;= 5) color = &apos;red&apos;;</span><br><span class="line">                if (dateList.length &lt;= 0) color = &apos;green&apos;;</span><br><span class="line">                this.$element = this.createDOM(`</span><br><span class="line">                    &lt;div&gt;  </span><br><span class="line">                        &lt;div style=&quot;color:$&#123;color&#125;&quot;&gt;当前List条数为 $&#123;dateList.length&#125;&lt;/div&gt;</span><br><span class="line">                        &lt;button onClick=&quot;this.add&quot;&gt;增加一条&lt;/button&gt;</span><br><span class="line">                        &lt;button onClick=&quot;this.reduce&quot;&gt;减少一条&lt;/button&gt;</span><br><span class="line">                        &lt;ul&gt;</span><br><span class="line">                            $&#123;</span><br><span class="line">                                dateList.map((item,index)=&gt;`&lt;li style=&quot;color:$&#123;color&#125;&quot;&gt;便签$&#123;index+1&#125; 时间是：$&#123;item&#125;&lt;/li&gt;`)</span><br><span class="line">                            &#125;</span><br><span class="line">                        &lt;/ul&gt;</span><br><span class="line">                    &lt;/div&gt;</span><br><span class="line">                `);</span><br><span class="line">                this.$container[oldElement ? &apos;replaceChild&apos; : &apos;appendChild&apos;](this.$element, oldElement);</span><br><span class="line">                return this.$element;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        mountNode(new Counter(),document.getElementById(&apos;root&apos;));</span><br></pre></td></tr></table></figure></p>
-<h3 id="代码抽离-amp-amp-优化"><a href="#代码抽离-amp-amp-优化" class="headerlink" title="代码抽离&amp;&amp;优化"></a><strong>代码抽离&amp;&amp;优化</strong></h3><p>看到这里可能，有一定抽象能力的客官可能会质疑了，《走近React的第一天》说好的代码抽离呢，你这也没有抽离啊！不就是简单的整合功能实现了一下功能吗，代码复用性还是不够啊？别别别，客官别急，咱们第三章会细细道来。</p>
+<h3 id="代码抽离-amp-amp-优化"><a href="#代码抽离-amp-amp-优化" class="headerlink" title="代码抽离&amp;&amp;优化"></a><strong>代码抽离&amp;&amp;优化</strong></h3><p>看到这里可能，有一定抽象能力的客官可能会质疑了，《走近React的第一天》说好的代码抽离呢，你这也没有抽离啊！不就是简单的整合功能实现了一下功能吗，代码复用性还是不够啊？别别别，客官别急，咱们第三章会细细道来。<a href="https://github.com/wilesen/BlogProject" target="_blank" rel="noopener">示例源码</a></p>
 
   </div>
   <footer class="article-footer">
