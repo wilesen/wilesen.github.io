@@ -21,7 +21,7 @@
 <meta property="og:description" content="走近React的第一天（一个简单的TodoList例子）前言React.js是一个专注于构建视图层的JavaScript库，使用它你可以非常轻松地创建你需要的用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己跟React初学者进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考React中文">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/04/28/ApproachingReactOne/toDoList.gif">
-<meta property="og:updated_time" content="2019-05-06T03:02:56.288Z">
+<meta property="og:updated_time" content="2019-06-11T09:52:13.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="走近React的第一天（一个简单的TodoList例子）">
 <meta name="twitter:description" content="走近React的第一天（一个简单的TodoList例子）前言React.js是一个专注于构建视图层的JavaScript库，使用它你可以非常轻松地创建你需要的用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己跟React初学者进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考React中文">
@@ -85,21 +85,21 @@
             
               <li class="category-list-container">
                 <a href="javascript:;">分类</a>
-                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javaScript/">javaScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a><span class="category-list-count">3</span></li></ul>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javaScript/">javaScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a><span class="category-list-count">4</span></li></ul>
               </li>
             
           
             
               <li class="tag-list-container">
                 <a href="javascript:;">标签</a>
-                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">3</span></li></ul>
+                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ract/">ract</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">3</span></li></ul>
               </li>
             
           
             
               <li class="archive-list-container">
                 <a href="javascript:;">归档</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">5</span></li></ul>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">6</span></li></ul>
               </li>
             
           
@@ -160,7 +160,7 @@
 
   </div>
   <div class="article-entry">
-    <h1 id="走近React的第一天（一个简单的TodoList例子）"><a href="#走近React的第一天（一个简单的TodoList例子）" class="headerlink" title="走近React的第一天（一个简单的TodoList例子）"></a>走近React的第一天（一个简单的TodoList例子）</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>React.js是一个专注于构建视图层的JavaScript库，使用它你可以非常轻松地创建你需要的用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己跟React初学者进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考<a href="https://react.docschina.org/" target="_blank" rel="noopener">React中文网</a>,这里就不过多的赘述了。</p>
+    <h2 id="走近React的第一天（一个简单的TodoList例子）"><a href="#走近React的第一天（一个简单的TodoList例子）" class="headerlink" title="走近React的第一天（一个简单的TodoList例子）"></a>走近React的第一天（一个简单的TodoList例子）</h2><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>React.js是一个专注于构建视图层的JavaScript库，使用它你可以非常轻松地创建你需要的用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己跟React初学者进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考<a href="https://react.docschina.org/" target="_blank" rel="noopener">React中文网</a>,这里就不过多的赘述了。</p>
 <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>这一章的目标是实现一个动态增减列表的ToDoList实例。</p>
 <p><strong><center>先上效果图</center></strong><br><img src="/2019/04/28/ApproachingReactOne/toDoList.gif" alt="显示效果图"></p>
 <p>我相信有一定基础的前端coder对于实现这个效果都是顺手拈来的。</p>

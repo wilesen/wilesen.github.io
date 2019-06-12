@@ -8,14 +8,14 @@
 
 <title>
   
-    分类: react
+    归档: 2019/6
   
 </title>
 
 <meta name="description" content="对未知的事物一直保持敬畏之心">
 <meta property="og:type" content="website">
 <meta property="og:title" content="人望山，鱼窥荷">
-<meta property="og:url" content="http://yoursite.com/categories/react/index.html">
+<meta property="og:url" content="http://yoursite.com/archives/2019/06/index.html">
 <meta property="og:site_name" content="人望山，鱼窥荷">
 <meta property="og:description" content="对未知的事物一直保持敬畏之心">
 <meta property="og:locale" content="zh-CN">
@@ -129,12 +129,19 @@
       
         <div style="max-width: 1000px">
       
-          <h1>react</h1>
-
+          
 
   
   
-    <div class="post-list">
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <h1><a href="/archives/2019" class="archive-year">2019</a></h1>
+        </div>
+        <div class="post-list">
+    
   
 
     <div class="post-list-item article">
@@ -235,213 +242,11 @@
     </div>
 
   
-    </div>
-  
-
-  
-  
-    <div class="post-list">
-  
-
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="/2019/05/05/ApproachingReactThree/">
-  模拟React的生命周期
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="/2019/05/05/ApproachingReactThree/"><span class="article-date">
-  2019-05-05
-</span>
-</a>
-        
-	<span class="article-category tagcloud">
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/react/">react</a></li></ul>
-	</span>
-
-
-        
-	<span class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-	</span>
-
-
-      </div>
-      <div class="article-entry">
-        
-          <h1 id="抽离代码-amp-amp-模拟React的生命周期"><a href="#抽离代码-amp-amp-模拟React的生命周期" class="headerlink" title="抽离代码&amp;&amp;模拟React的生命周期"></a><strong>抽离代码&amp;&amp;模拟React的生命周期</strong></h1><p>这一章的目标是抽离《走近React的第二天》中可复用的代码部分同时模拟React的部分基础生命周期，这里你需要对React的生命周期有一点基础的了解，明白每个周期的作用，这样才能方便你去学习这一章的内容。</p>
-<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a><strong>目标</strong></h2><ul>
-<li><p>抽离可复用代码</p>
-</li>
-<li><p>模拟React部分生命周期</p>
-</li>
-</ul>
-<h3 id="React生命周期"><a href="#React生命周期" class="headerlink" title="React生命周期"></a><strong>React生命周期</strong></h3><p>React提供的生命周期在React实际开发过程中是十分重要的，网上已经有很多关于React的生命周期的介绍，就不过多的赘述了，这里分享几个我觉得不错的介绍<a href="https://www.jianshu.com/p/514fe21b9914" target="_blank" rel="noopener">详解React生命周期</a>、<a href="https://www.cnblogs.com/qiaojie/p/6135180.html" target="_blank" rel="noopener">React 生命周期</a>。</p>
-<p><img src="/2019/05/05/ApproachingReactThree/React生命周期.jpg" alt="显示效果图"><br><strong><center>（图一：React生命周期）</center></strong></p>
-<p><img src="/2019/05/05/ApproachingReactThree/theLifeCycle.gif" alt="显示效果图"><br><strong><center>（图二：效果图）</center></strong></p>
-<h2 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a><strong>实现方案</strong></h2><ul>
-<li><p>首先在父组件<span style="color:green"><strong>Component</strong></span>中抽离出<span style="color:red"><strong>Render、setState、bindEvent、createDOM</strong></span>等可复用方法，使得子组件可以通过<span style="color:red"><strong>extends</strong></span>继承的方式拿到Component中抽离出的方法。</p>
-</li>
-<li><p>在渲染的时候通过判断目前是否已完成渲染<span style="color:red"><strong>（this.$element）</strong></span>以及调用<span style="color:red"><strong>_createDOM</strong></span>来进行生命周期的判定。</p>
-</li>
-<li><p>componentWillMount&nbsp;&nbsp;&nbsp;该生命周期应该是在组件将要渲染之前触发，所以前置条件是<span style="color:red"><strong>（this.$element）</strong></span>为undefined且在appendChild方法调用之前触发。</p>
-</li>
-<li><p>componentDidMount&nbsp;&nbsp;&nbsp;该生命周期应该是在组件第一次完成渲染之后触发，所以前置条件是<span style="color:red"><strong>（this.$element）</strong></span>为当前最近的DOM节点的且在appendChild方法调用之后再触发。</p>
-</li>
-<li><p>shouldComponentUpdate&nbsp;&nbsp;&nbsp;该生命周期应该是一个比较特殊的生命周期，该生命周期应该是在组件已经完成渲染且State中数据修改之后且该生命周期返回值为<span style="color:green"><strong>true</strong></span>的时候才会触发,在组件中判定该生命周期返回值为true才会继续完成渲染。</p>
-</li>
-<li><p>componentWillUpdate&nbsp;&nbsp;&nbsp;该生命周期应该是在组件已经完成渲染且State中数据修改之后触发，所以前置条件是<span style="color:red"><strong>（this.$element）</strong></span>已有DOM节点的且在replaceChild方法调用之前再触发</p>
-</li>
-<li><p>componentDidUpdate&nbsp;&nbsp;&nbsp;该生命周期应该是在组件已经完成渲染且State中数据修改之后触发，所以前置条件是<span style="color:red"><strong>（this.$element）</strong></span>已有DOM节点的且在replaceChild方法调用之后再触发</p>
-</li>
-</ul>
-<h3 id="父组件Component"><a href="#父组件Component" class="headerlink" title="父组件Component"></a><strong>父组件Component</strong></h3><figure class="highlight plain"><figcaption><span>Block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">class Component&#123;</span><br><span class="line">        constructor(props=&#123;&#125;)&#123;</span><br><span class="line">            this.props=props;</span><br><span class="line">        &#125;</span><br><span class="line">        setState(nextState)&#123;</span><br><span class="line">            this.state=&#123;...this.state,...nextState&#125;;</span><br><span class="line">            this._render();</span><br><span class="line">        &#125;</span><br><span class="line">        _createDOM(htmlDom)&#123;</span><br><span class="line">            const fragment = document.createElement(&apos;div&apos;);</span><br><span class="line">            fragment.innerHTML = htmlDom;</span><br><span class="line">            return this._bindEvent(fragment.firstElementChild);          </span><br><span class="line">        &#125;</span><br><span class="line">        _bindEvent(el)&#123;</span><br><span class="line">            el.getAttributeNames().forEach(name =&gt; &#123;</span><br><span class="line">                const matches = name.match(/^on([a-z]+)$/);</span><br><span class="line">                matches &amp;&amp; el.addEventListener(matches[1], new Function(&apos;return &apos; + el.getAttribute(name)).bind(this)(), false);</span><br><span class="line">            &#125;);</span><br><span class="line">            Array.from(el.children).forEach( el =&gt; this._bindEvent(el));</span><br><span class="line">            return el;</span><br><span class="line">        &#125;</span><br><span class="line">        _render()&#123;</span><br><span class="line">            const oldElement = this.$element;</span><br><span class="line">            if (oldElement) &#123;</span><br><span class="line">                if(this.shouldComponentUpdate&amp;&amp;!this.shouldComponentUpdate.bind(this)())&#123;</span><br><span class="line">                    return ;</span><br><span class="line">                &#125;</span><br><span class="line">                this.componentWillUpdate&amp;&amp;this.componentWillUpdate.bind(this)();</span><br><span class="line">                this.$element = this._createDOM(this.render());</span><br><span class="line">                this.$container.replaceChild(this.$element, oldElement);</span><br><span class="line">                this.componentDidUpdate &amp;&amp; this.componentDidUpdate.bind(this)();</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                this.componentWillMount &amp;&amp; this.componentWillMount.bind(this)();</span><br><span class="line">                this.$element = this._createDOM(this.render());</span><br><span class="line">                this.$container.appendChild(this.$element);</span><br><span class="line">                this.componentDidMount &amp;&amp; this.componentDidMount.bind(this)();</span><br><span class="line">            &#125;</span><br><span class="line">            return this.$element;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="子组件Counter"><a href="#子组件Counter" class="headerlink" title="子组件Counter"></a><strong>子组件Counter</strong></h3><figure class="highlight plain"><figcaption><span>Block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">class  Counter extends Component&#123;</span><br><span class="line">    constructor(props)&#123;</span><br><span class="line">        super(props);</span><br><span class="line">        this.state=&#123;</span><br><span class="line">            dateList:[]</span><br><span class="line">        &#125;</span><br><span class="line">        this.add=this.add.bind(this);</span><br><span class="line">        this.reduce=this.reduce.bind(this);</span><br><span class="line">    &#125;</span><br><span class="line">    componentWillMount()&#123;</span><br><span class="line">        console.log(&apos;componentWillMount&apos;, this.state);</span><br><span class="line">    &#125;</span><br><span class="line">    componentDidMount()&#123;</span><br><span class="line">        console.log(&apos;componentDidMount&apos;, this.state);</span><br><span class="line">    &#125;</span><br><span class="line">    componentDidUpdate()&#123;</span><br><span class="line">        console.log(&apos;componentDidUpdate&apos;, this.state);</span><br><span class="line">    &#125;</span><br><span class="line">    shouldComponentUpdate()&#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    componentWillUpdate()&#123;</span><br><span class="line">        console.log(&apos;componentWillUpdate&apos;, this.state); </span><br><span class="line">    &#125;</span><br><span class="line">    add()&#123;</span><br><span class="line">        let newDateList=[...this.state.dateList]</span><br><span class="line">        newDateList.push(new Date().toString());</span><br><span class="line">        this.setState(&#123;dateList:newDateList&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    reduce()&#123;</span><br><span class="line">        let newDateList=[...this.state.dateList]</span><br><span class="line">        newDateList.pop();</span><br><span class="line">        this.setState(&#123;dateList:newDateList&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        const &#123;dateList&#125;=this.state;</span><br><span class="line">        const oldElement=this.$element;</span><br><span class="line">        let color=&apos;blue&apos;;</span><br><span class="line">        if (dateList.length &gt;= 5) color = &apos;red&apos;;</span><br><span class="line">        if (dateList.length &lt;= 0) color = &apos;green&apos;;</span><br><span class="line">        console.log(&apos;render&apos;)</span><br><span class="line">       return (</span><br><span class="line">        `</span><br><span class="line">            &lt;div&gt;  </span><br><span class="line">                &lt;div style=&quot;color:$&#123;color&#125;&quot;&gt;当前List条数为 $&#123;dateList.length&#125;&lt;/div&gt;</span><br><span class="line">                &lt;button onClick=&quot;this.add&quot;&gt;增加一条&lt;/button&gt;</span><br><span class="line">                &lt;button onClick=&quot;this.reduce&quot;&gt;减少一条&lt;/button&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    $&#123;</span><br><span class="line">                        dateList.map((item,index)=&gt;`&lt;li style=&quot;color:$&#123;color&#125;&quot;&gt;便签$&#123;index+1&#125; 时间是：$&#123;item&#125;&lt;/li&gt;`)</span><br><span class="line">                    &#125;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        `</span><br><span class="line">       )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>现在回头再看现在的Counter组件，是不是跟使用通过继承React的Component组件的写法已基本无异了，当然这里仅仅只是基础的模拟实现帮助理解学习。<a href="https://github.com/wilesen/BlogProject" target="_blank" rel="noopener">示例源码</a></p>
-
-        
-      </div>
-    </div>
-
-  
-    </div>
-  
-
-  
-  
-    <div class="post-list">
-  
-
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="/2019/05/05/ApproachingReactTwo/">
-  模拟实现render&amp;&amp;setState方法
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="/2019/05/05/ApproachingReactTwo/"><span class="article-date">
-  2019-05-05
-</span>
-</a>
-        
-	<span class="article-category tagcloud">
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/react/">react</a></li></ul>
-	</span>
-
-
-        
-	<span class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-	</span>
-
-
-      </div>
-      <div class="article-entry">
-        
-          <h1 id="模拟实现React的render以及setState方法"><a href="#模拟实现React的render以及setState方法" class="headerlink" title="模拟实现React的render以及setState方法"></a><strong>模拟实现React的render以及setState方法</strong></h1><p>这一章的主要目标是模拟实现React的render以及setState更新state后刷新DOM的实现，看到这里你需要一点点ES6的基础，如果这里你还不是很会，推荐一下阮一峰老师的<a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">ES6教程</a>写的特别好。</p>
-<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a><strong>目标</strong></h2><ul>
-<li><p>模拟实现React的render方法动态的生成Dom元素</p>
-</li>
-<li><p>绑定Dom节点上的函数</p>
-</li>
-<li><p>实现setState操作并且更新数据后运行Render方法重新渲染DOM元素。</p>
-</li>
-</ul>
-<p><strong><center>效果图</center></strong></p>
-<p><img src="/2019/05/05/ApproachingReactTwo/todoList2.gif" alt="显示效果图"></p>
-<center style="color:gray">(ps： 每条li之间显示的<span style="color:red"> ，</span>是因为对数组对象调用toString方法后导致的，这里就不过多解释了)</center>
-
-<h2 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a><strong>实现方案</strong></h2><ul>
-<li><p>抽离render方法，内部通过innerHtml方法渲染DOM元素<span style="color:gray">（当然了这里只是简单的模拟，<span style="color:red">innerHTML</span>方法会重新渲染全部的DOM节点，在数据量大结构复杂的元素需要生成的时候会占用极大的性能，React使用的是<span style="color:red">VirtualDOM</span>配合<span style="color:red">diff</span>算法实现的反应更快且占用资源更少，后续会在博客中更新）</span></p>
-</li>
-<li><p>通过正则表达式解析出自定义特定结构的属性并且在类的内部绑定对应的函数</p>
-</li>
-<li><p>在调用<span style="color:red">setState</span>方法时同时触发抽离出来的<span style="color:red">render</span>方法达到重新渲染视图的目的。</p>
-</li>
-</ul>
-<h3 id="第一步：抽离render方法-用于渲染DOM元素"><a href="#第一步：抽离render方法-用于渲染DOM元素" class="headerlink" title="第一步：抽离render方法(用于渲染DOM元素)"></a><strong>第一步：抽离render方法(用于渲染DOM元素)</strong></h3><p><span style="color:green"><strong>（解析）:</strong></span>遍历存在state中的dateList数组动态的生成对应的 <span style="color:green"><code>&lt;li&gt;&lt;/li&gt;</code></span> 元素结构动态，然后在判断触发render方法时，该模块是否已经存在Dom结构，如果存在则替换现有DOM结构，反之则插入DOM结构<br><figure class="highlight plain"><figcaption><span>block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">createDOM(htmlDom)&#123;</span><br><span class="line">            const fragment = document.createElement(&apos;div&apos;);</span><br><span class="line">            fragment.innerHTML = htmlDom; </span><br><span class="line">            return this.bindEvent(fragment.firstElementChild);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
- <figure class="highlight plain"><figcaption><span>block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">render()&#123;</span><br><span class="line">            const &#123;dateList&#125;=this.state;</span><br><span class="line">            const oldElement=this.$element;</span><br><span class="line">            let color=&apos;blue&apos;;</span><br><span class="line">            if (dateList.length &gt;= 5) color = &apos;red&apos;;</span><br><span class="line">            if (dateList.length &lt;= 0) color = &apos;green&apos;;</span><br><span class="line">            this.$element = this.createDOM(`</span><br><span class="line">                &lt;div&gt;  </span><br><span class="line">                    &lt;div style=&quot;color:$&#123;color&#125;&quot;&gt;当前List条数为 $&#123;dateList.length&#125;&lt;/div&gt;</span><br><span class="line">                    &lt;button onClick=&quot;this.add&quot;&gt;增加一条&lt;/button&gt;</span><br><span class="line">                    &lt;button onClick=&quot;this.reduce&quot;&gt;减少一条&lt;/button&gt;</span><br><span class="line">                    &lt;ul&gt;</span><br><span class="line">                        $&#123;</span><br><span class="line">                            dateList.map((item,index)=&gt;`&lt;li style=&quot;color:$&#123;color&#125;&quot;&gt;便签$&#123;index+1&#125; 时间是：$&#123;item&#125;&lt;/li&gt;`)</span><br><span class="line">                        &#125;</span><br><span class="line">                    &lt;/ul&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            `);</span><br><span class="line">            this.$container[oldElement ? &apos;replaceChild&apos; : &apos;appendChild&apos;](this.$element, oldElement);</span><br><span class="line">            return this.$element;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="第二步：解析属性并绑定对应函数"><a href="#第二步：解析属性并绑定对应函数" class="headerlink" title="第二步：解析属性并绑定对应函数"></a><strong>第二步：解析属性并绑定对应函数</strong></h3><p><span style="color:green"><strong>（解析）:</strong></span>对传入的DOM结构进行递归操作，通过正则表达式解析元素的自定义的属性,通过<span style="color:red"><strong>addEventListener</strong></span>方法绑定对应的函数</p>
-<figure class="highlight plain"><figcaption><span>block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bindEvent(el)&#123;</span><br><span class="line">        el.getAttributeNames().forEach(name =&gt; &#123;</span><br><span class="line">            const matches=name.match(/^on([a-z]+)$/);</span><br><span class="line">            matches &amp;&amp; el.addEventListener(matches[1], new Function(&apos;return &apos; + el.getAttribute(name)).bind(this)(),false);</span><br><span class="line">        &#125;);</span><br><span class="line">        Array.from(el.children).forEach(el=&gt;this.bindEvent(el));</span><br><span class="line">        return el;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="第三步：调用setState方法并触发Render方法重新渲染"><a href="#第三步：调用setState方法并触发Render方法重新渲染" class="headerlink" title="第三步：调用setState方法并触发Render方法重新渲染"></a><strong>第三步：调用setState方法并触发Render方法重新渲染</strong></h3><p><span style="color:green"><strong>（解析）:</strong></span>使用<span style="color:red"> <strong>Object.assign</strong></span>方法或操作符<span style="color:red"> <strong>(…)</strong> </span>方法将存在state中的数据跟传递过来新的数据合并，同时再调用<span style="color:red"> <strong>render</strong> </span>方法触发页面的DOM结构的重新渲染</p>
-<figure class="highlight plain"><figcaption><span>block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setState(nextState)&#123;</span><br><span class="line">    this.state=&#123;...this.state,...nextState&#125;;</span><br><span class="line">    this.render();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>这样基本就能够完成制定的三个目标了。</p>
-<h3 id="完整的代码"><a href="#完整的代码" class="headerlink" title="完整的代码"></a><strong>完整的代码</strong></h3><p>html部分：</p>
-<figure class="highlight plain"><figcaption><span>block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<p>JavaScript部分：<br><figure class="highlight plain"><figcaption><span>block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">function mountNode(counter, root)&#123;</span><br><span class="line">            (counter.$container = root).appendChild(counter.render());</span><br><span class="line">        &#125;</span><br><span class="line">        class  Counter&#123;</span><br><span class="line">            constructor()&#123;</span><br><span class="line">                this.state=&#123;</span><br><span class="line">                    dateList:[]</span><br><span class="line">                &#125;</span><br><span class="line">                this.add=this.add.bind(this);</span><br><span class="line">                this.reduce=this.reduce.bind(this);</span><br><span class="line">            &#125;</span><br><span class="line">            add()&#123;</span><br><span class="line">                let newDateList=[...this.state.dateList]</span><br><span class="line">                newDateList.push(new Date().toString());</span><br><span class="line">                this.setState(&#123;dateList:newDateList&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            reduce()&#123;</span><br><span class="line">                let newDateList=[...this.state.dateList]</span><br><span class="line">                newDateList.pop();</span><br><span class="line">                this.setState(&#123;dateList:newDateList&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            bindEvent(el)&#123;</span><br><span class="line">                el.getAttributeNames().forEach(name =&gt; &#123;</span><br><span class="line">                    const matches=name.match(/^on([a-z]+)$/);</span><br><span class="line">                    matches &amp;&amp; el.addEventListener(matches[1], new Function(&apos;return &apos; + el.getAttribute(name)).bind(this)(),false);</span><br><span class="line">                &#125;);</span><br><span class="line">                Array.from(el.children).forEach(el=&gt;this.bindEvent(el));</span><br><span class="line">                return el;</span><br><span class="line">            &#125;</span><br><span class="line">            setState(nextState)&#123;</span><br><span class="line">                this.state=&#123;...this.state,...nextState&#125;;</span><br><span class="line">                this.render();</span><br><span class="line">            &#125;</span><br><span class="line">            createDOM(htmlDom)&#123;</span><br><span class="line">                const fragment = document.createElement(&apos;div&apos;);</span><br><span class="line">                fragment.innerHTML = htmlDom; </span><br><span class="line">                return this.bindEvent(fragment.firstElementChild);</span><br><span class="line">            &#125;</span><br><span class="line">            render()&#123;</span><br><span class="line">                const &#123;dateList&#125;=this.state;</span><br><span class="line">                const oldElement=this.$element;</span><br><span class="line">                let color=&apos;blue&apos;;</span><br><span class="line">                if (dateList.length &gt;= 5) color = &apos;red&apos;;</span><br><span class="line">                if (dateList.length &lt;= 0) color = &apos;green&apos;;</span><br><span class="line">                this.$element = this.createDOM(`</span><br><span class="line">                    &lt;div&gt;  </span><br><span class="line">                        &lt;div style=&quot;color:$&#123;color&#125;&quot;&gt;当前List条数为 $&#123;dateList.length&#125;&lt;/div&gt;</span><br><span class="line">                        &lt;button onClick=&quot;this.add&quot;&gt;增加一条&lt;/button&gt;</span><br><span class="line">                        &lt;button onClick=&quot;this.reduce&quot;&gt;减少一条&lt;/button&gt;</span><br><span class="line">                        &lt;ul&gt;</span><br><span class="line">                            $&#123;</span><br><span class="line">                                dateList.map((item,index)=&gt;`&lt;li style=&quot;color:$&#123;color&#125;&quot;&gt;便签$&#123;index+1&#125; 时间是：$&#123;item&#125;&lt;/li&gt;`)</span><br><span class="line">                            &#125;</span><br><span class="line">                        &lt;/ul&gt;</span><br><span class="line">                    &lt;/div&gt;</span><br><span class="line">                `);</span><br><span class="line">                this.$container[oldElement ? &apos;replaceChild&apos; : &apos;appendChild&apos;](this.$element, oldElement);</span><br><span class="line">                return this.$element;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        mountNode(new Counter(),document.getElementById(&apos;root&apos;));</span><br></pre></td></tr></table></figure></p>
-<h3 id="代码抽离-amp-amp-优化"><a href="#代码抽离-amp-amp-优化" class="headerlink" title="代码抽离&amp;&amp;优化"></a><strong>代码抽离&amp;&amp;优化</strong></h3><p>看到这里可能，有一定抽象能力的客官可能会质疑了，《走近React的第一天》说好的代码抽离呢，你这也没有抽离啊！不就是简单的整合功能实现了一下功能吗，代码复用性还是不够啊？别别别，客官别急，咱们第三章会细细道来。<a href="https://github.com/wilesen/BlogProject" target="_blank" rel="noopener">示例源码</a></p>
-
-        
-      </div>
-    </div>
-
-  
-    </div>
-  
-
-  
-  
-    <div class="post-list">
-  
-
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="/2019/04/28/ApproachingReactOne/">
-  走近React的第一天（一个简单的TodoList例子）
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="/2019/04/28/ApproachingReactOne/"><span class="article-date">
-  2019-04-28
-</span>
-</a>
-        
-	<span class="article-category tagcloud">
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/react/">react</a></li></ul>
-	</span>
-
-
-        
-	<span class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-	</span>
-
-
-      </div>
-      <div class="article-entry">
-        
-          <h2 id="走近React的第一天（一个简单的TodoList例子）"><a href="#走近React的第一天（一个简单的TodoList例子）" class="headerlink" title="走近React的第一天（一个简单的TodoList例子）"></a>走近React的第一天（一个简单的TodoList例子）</h2><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>React.js是一个专注于构建视图层的JavaScript库，使用它你可以非常轻松地创建你需要的用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己跟React初学者进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考<a href="https://react.docschina.org/" target="_blank" rel="noopener">React中文网</a>,这里就不过多的赘述了。</p>
-<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>这一章的目标是实现一个动态增减列表的ToDoList实例。</p>
-<p><strong><center>先上效果图</center></strong><br><img src="/2019/04/28/ApproachingReactOne/toDoList.gif" alt="显示效果图"></p>
-<p>我相信有一定基础的前端coder对于实现这个效果都是顺手拈来的。</p>
-<h4 id="html部分"><a href="#html部分" class="headerlink" title="html部分"></a><strong>html部分</strong></h4><p>对页面结构添加一定的 HTML 结构</p>
-<figure class="highlight plain"><figcaption><span>Block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;root&quot;&gt;</span><br><span class="line">    &lt;button id=&apos;add&apos;&gt;增加一条&lt;/button&gt;</span><br><span class="line">    &lt;button id=&apos;reduce&apos;&gt;减少一条&lt;/button&gt;</span><br><span class="line">    &lt;ul id=&apos;list&apos; &gt;&lt;/ul&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="js部分"><a href="#js部分" class="headerlink" title="js部分"></a><strong>js部分</strong></h4><p>加入以下JavaScript的Dom操作</p>
-<figure class="highlight plain"><figcaption><span>Block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const UL=document.getElementById(&apos;list&apos;);</span><br><span class="line">const add= document.getElementById(&apos;add&apos;);</span><br><span class="line">const reduce= document.getElementById(&apos;reduce&apos;);</span><br><span class="line">let num=0;</span><br><span class="line">let Arr=[];</span><br><span class="line">add.addEventListener(&apos;click&apos;,()=&gt;&#123;</span><br><span class="line">    let OL=document.createElement(&quot;ol&quot;);</span><br><span class="line">    let TEXT=document.createTextNode(`这里是我第$&#123;num+1&#125;条需要做的`);</span><br><span class="line">    OL.appendChild(TEXT);</span><br><span class="line">    UL.appendChild(OL)</span><br><span class="line">    num++;     </span><br><span class="line">&#125;)</span><br><span class="line">reduce.addEventListener(&apos;click&apos;,()=&gt;&#123;    </span><br><span class="line">    if(UL.children.length)&#123;</span><br><span class="line">        UL.removeChild(UL.children[UL.children.length-1]);</span><br><span class="line">        num--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>功能和实现都很简单，到这里实例已经可以简单的实现List的增加和减少了。</p>
-<p>毫无疑问这样的代码可谓是言简意赅，很容易就能看懂每一段代码的具体目的，但是这样的代码在开发过程中的效率是很低的，没有什么复用性。如果这个时候PM过来找你说，’咱们现在不做ToDoList了，我们来做一个点赞评价模块‘，那么很不幸这块代码可能就需要全部推翻重写，对于咱们码农来说这样又平白无故的增加了不少工作量。那么我们能不能去把这些代码去抽离一下呢？客官别急，咱们后续慢慢看来！<a href="https://github.com/wilesen/BlogProject" target="_blank" rel="noopener">示例源码</a></p>
-
-        
-      </div>
-    </div>
-
-  
-    </div>
-  
 
 
 
 
-
+</div></section>
 
           <div class="main-footer">
   
