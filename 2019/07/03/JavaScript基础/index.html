@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="对未知的事物一直保持敬畏之心">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        JavaScript基础 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/">
+        </div>
+        <div class="name">
+            <i>wilesen</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript基础"><span class="toc-text">JavaScript基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量和类型"><span class="toc-text">变量和类型</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        JavaScript基础
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-07-03 09:57:00</span></span>
+        
+        
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="JavaScript基础"><a href="#JavaScript基础" class="headerlink" title="JavaScript基础"></a>JavaScript基础</h2><h3 id="变量和类型"><a href="#变量和类型" class="headerlink" title="变量和类型"></a>变量和类型</h3><p>1.JavaScript规定的几种数据类型</p>
+<pre><code>JavaScript规范中一共定义了七种数据类型，分类基本类型和引用类型。
+其中基本类型有：String、Number、Boolean、Undefined、Null、Symbol（es6）
+引用数据类型：Object
+</code></pre><p>2.JavaScript对象的底层数据结构是什么</p>
+<pre><code>在JavaScript中Object底层是使用FixedArray，一种类数组的方式来实现的，通过记录JSON数据格式的数据中的index与value来记录数据。这里推荐李银城大佬的博文，讲解的很详细。
+</code></pre><p><a href="https://www.rrfed.com/2017/04/04/chrome-object/" target="_blank" rel="noopener">从Chrome源码看JS Object的实现</a></p>
+<p>3.Symbol类型在实际开发中的应用？如何可手动实现一个简单的Symbol？</p>
+<p>首先我们先简单的看看Symbol的用法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Symbol() --&gt;</span><br><span class="line">let s1=Symbol(&apos;symbol&apos;);</span><br><span class="line">let s2=Symbol(&apos;symbol&apos;);</span><br><span class="line"></span><br><span class="line">  s1==s2 //false</span><br><span class="line"></span><br><span class="line">  s1.toString() // &quot;Symbol(symbol)&quot; </span><br><span class="line">  s2.toString() // &quot;Symbol(symbol)&quot;</span><br><span class="line"></span><br><span class="line">  &lt;!-- Symbol.for() --&gt;</span><br><span class="line"></span><br><span class="line">let s3=Symbol.for(&apos;symbol&apos;)</span><br><span class="line">let s4=Symbol.for(&apos;symbol&apos;)</span><br><span class="line"></span><br><span class="line">s3===s4 //true</span><br><span class="line"></span><br><span class="line">&lt;!-- 隐式调用toString方法 --&gt;</span><br><span class="line"></span><br><span class="line">const returnString=&#123;</span><br><span class="line">    toString()&#123;</span><br><span class="line">        return &apos;testSymbol&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let sbl=Symbol(returnString);</span><br><span class="line"></span><br><span class="line">sbl //testSymbol</span><br><span class="line"></span><br><span class="line">&lt;!-- 对Symbol类型的转换 --&gt;</span><br><span class="line"></span><br><span class="line">Boolean(Symbol())//true</span><br><span class="line"></span><br><span class="line">Number(Symbol()) // TypeError</span><br><span class="line"></span><br><span class="line">&lt;!-- Symbol在对象中的使用 --&gt;</span><br><span class="line">let symbolKey=Symbol();</span><br><span class="line"></span><br><span class="line">let obj=&#123;&#125;</span><br><span class="line">obj[symbolKey]=&apos;123&apos;;</span><br><span class="line"></span><br><span class="line">//  or</span><br><span class="line">let obj=&#123;</span><br><span class="line">    [symbolKey]:&apos;123&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// or</span><br><span class="line">let obj = &#123;&#125;;</span><br><span class="line">Object.defineProperty(obj, symbolKey, &#123; value: &apos;123&apos; &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">obj[symbolKey] //123</span><br></pre></td></tr></table></figure></p>
+<pre><code>场景一：使用Symbol来做对象的属性名。
+
+使用Symbol来做属性名时是没办法被Object.keys或者for in来枚举，就算使用JSON.stringify对其打印显示的也只是一个空对象
+
+Ps:但是不是真的无法获取以Symbol方式定义的对象属性，例如使用Object.getOwnPropertySymbols(obj) ，Reflect.ownKeys(obj)  仍然是可以拿到对象属性。
+
+场景二：使用Symbol来代替常量
+因为Symbol的唯一性所以在命名一些常量时，其本身就是唯一的，减少命名的冲突
+</code></pre>
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

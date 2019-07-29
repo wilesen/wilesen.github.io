@@ -1,167 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="对未知的事物一直保持敬畏之心">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
+    <title>
+        
+        React之ExpirationTime - undefined
+        
+    </title>
 
-
-<title>
-  
-    React之ExpirationTime
-  
-</title>
-
-<meta name="description" content="简析React源码之ExpirationTime前言熟悉React的朋友都知道如果在组件内使用setState会创建一个Update从而导致页面重新渲染，那么理论上如果有多个setState就会导致多次渲染，那么问题来了，实际真的是这个样的吗？ 演示Demo首先我们先简单的建立一个demoBlock12345678910111213141516171819202122232425262728293">
-<meta name="keywords" content="React">
-<meta property="og:type" content="article">
-<meta property="og:title" content="React之ExpirationTime">
-<meta property="og:url" content="http://yoursite.com/2019/06/25/React之ExpirationTime/index.html">
-<meta property="og:site_name" content="人望山，鱼窥荷">
-<meta property="og:description" content="简析React源码之ExpirationTime前言熟悉React的朋友都知道如果在组件内使用setState会创建一个Update从而导致页面重新渲染，那么理论上如果有多个setState就会导致多次渲染，那么问题来了，实际真的是这个样的吗？ 演示Demo首先我们先简单的建立一个demoBlock12345678910111213141516171819202122232425262728293">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/06/25/React之ExpirationTime/ExpirationTime.png">
-<meta property="og:image" content="http://yoursite.com/2019/06/25/React之ExpirationTime/ExpirationTimeshow.png">
-<meta property="og:updated_time" content="2019-06-24T23:09:41.099Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React之ExpirationTime">
-<meta name="twitter:description" content="简析React源码之ExpirationTime前言熟悉React的朋友都知道如果在组件内使用setState会创建一个Update从而导致页面重新渲染，那么理论上如果有多个setState就会导致多次渲染，那么问题来了，实际真的是这个样的吗？ 演示Demo首先我们先简单的建立一个demoBlock12345678910111213141516171819202122232425262728293">
-<meta name="twitter:image" content="http://yoursite.com/2019/06/25/React之ExpirationTime/ExpirationTime.png">
-
-
-  <link rel="alternative" href="/atom.xml" title="人望山，鱼窥荷" type="application/atom+xml">
-
-
-
-  <link rel="icon" href="/img/favicon.ico">
-
-
-<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
-<link rel="stylesheet" href="/styles/main.css">
-
-
-
-
-
-
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
 </head>
-<body class="monochrome">
-  <div class="mobile-header">
-  <button class="sidebar-toggle" type="button">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
-  <a class="title" href="/">人望山，鱼窥荷</a>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
 </div>
 
-  <div class="main-container">
-    <div class="sidebar">
-  <div class="header">
-    <h1 class="title"><a href="/">人望山，鱼窥荷</a></h1>
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
     
-    <div class="info">
-      <div class="content">
+    <div class="index-left">
         
-          <div class="description">对未知的事物一直保持敬畏之心</div>
-        
-        
-          <div class="author">wilesen</div>
-        
-      </div>
-      
-        <div class="avatar">
-          
-            <a href="https://github.com/wilesen"><img src="https://avatars2.githubusercontent.com/u/24243167?s=460&amp;v=4"></a>
-          
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/">
         </div>
-      
+        <div class="name">
+            <i>wilesen</i>
+        </div>
     </div>
-  </div>
-  <div class="body">
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
     
-      
-        <ul class="nav">
-          
-            
-              <li class="category-list-container">
-                <a href="javascript:;">分类</a>
-                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javaScript/">javaScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a><span class="category-list-count">3</span></li></ul>
-              </li>
-            
-          
-            
-              <li class="tag-list-container">
-                <a href="javascript:;">标签</a>
-                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">3</span></li></ul>
-              </li>
-            
-          
-            
-              <li class="archive-list-container">
-                <a href="javascript:;">归档</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">7</span></li></ul>
-              </li>
-            
-          
-        </ul>
-      
-        <ul class="nav">
-          
-            
-              <li>
-                <a href="/" title="首页">首页</a>
-              </li>
-            
-          
-        </ul>
-      
-        <ul class="nav">
-          
-            
-              <li>
-                <a href="https://github.com/wilesen" title="Github" target="_blank" rel="noopener">Github</a>
-              </li>
-            
-          
-        </ul>
-      
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简析React源码之ExpirationTime"><span class="toc-text">简析React源码之ExpirationTime</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#演示Demo"><span class="toc-text">演示Demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码分析"><span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#示例demo代码"><span class="toc-text">示例demo代码</span></a></li></ol></li></ol></li></ol>
+</div>
     
-  </div>
 </div>
 
-    <div class="main-content">
-      
-        <div style="max-width: 1000px">
-      
-          <article id="post-React之ExpirationTime" class="article article-type-post">
-  
-    <h1 class="article-header">
-      React之ExpirationTime
-    </h1>
-  
-  
 
-  <div class="article-info">
-    <span class="article-date">
-  2019-06-25
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        React之ExpirationTime
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-06-25 06:22:20</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#React" title="React">React</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
 </span>
 
-    
-	<span class="article-category tagcloud">
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
-	</span>
-
-
-    
-	<span class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-	</span>
-
-
-  </div>
-  <div class="article-entry">
-    <h1 id="简析React源码之ExpirationTime"><a href="#简析React源码之ExpirationTime" class="headerlink" title="简析React源码之ExpirationTime"></a><strong>简析React源码之ExpirationTime</strong></h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>熟悉React的朋友都知道如果在组件内使用setState会创建一个Update从而导致页面重新渲染，那么理论上如果有多个setState就会导致多次渲染，那么问题来了，实际真的是这个样的吗？</p>
+    </div>
+    <div class="post-content ">
+        <h1 id="简析React源码之ExpirationTime"><a href="#简析React源码之ExpirationTime" class="headerlink" title="简析React源码之ExpirationTime"></a><strong>简析React源码之ExpirationTime</strong></h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>熟悉React的朋友都知道如果在组件内使用setState会创建一个Update从而导致页面重新渲染，那么理论上如果有多个setState就会导致多次渲染，那么问题来了，实际真的是这个样的吗？</p>
 <h2 id="演示Demo"><a href="#演示Demo" class="headerlink" title="演示Demo"></a>演示Demo</h2><p>首先我们先简单的建立一个demo<br><figure class="highlight plain"><figcaption><span>Block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">class App extends Component &#123;</span><br><span class="line">  static state = &#123;</span><br><span class="line">    name: 1</span><br><span class="line">  &#125;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props)</span><br><span class="line">    this.state = &#123;</span><br><span class="line">      number: 10000</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">      number: 10001</span><br><span class="line">    &#125;)</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">      number: 10002</span><br><span class="line">    &#125;)</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">      number: 10003</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    const &#123; number &#125; = this.state;</span><br><span class="line">    console.log(&apos;rendering&apos;)</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        我的编号是：&#123;number&#125;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure></p>
 <p>可见在这个demo中componentDidMount中连续执行了三次setState，那么加上初始化渲染执行的一次render函数，理论上在控制台中应该会打印四次rendering，但是事实真的是这样吗？</p>
 <p><img src="/2019/06/25/React之ExpirationTime/ExpirationTime.png" alt="显示效果图"></p>
@@ -181,119 +151,63 @@
 <li>根据图二可以得知，在computeInteractiveExpiration函数中区间在10以内的获取的ExpirationTime相同，computeAsyncExpiration函数中区间为25以内获取的ExpirationTime相同。如果不同的Update获取到的ExpirationTime相同，那么React则会认为把它整合为同一个Update一次性更新，避免因为不必要的重复渲染导致性能问题。这也就是为什么在控制台中只打印出了两次rendering的原因。</li>
 </ul>
 
-  </div>
-  <footer class="article-footer">
-    
-  <div class="cc">
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="署名-相同方式共享">
-      <img src="/images/cc/cc.png">
-      
-          <img src="/images/cc/by.png">
         
-          <img src="/images/cc/sa.png">
-      
-      <span>
-        本作品采用知识共享 署名-相同方式共享 4.0 国际许可协议进行许可。
-      </span>
-    </a>
-  </div>
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
 
+        <div id="lv-container">
+        </div>
 
-    
-
-  </footer>
-</article>
-
-
-
-
-
-
-
-          <div class="main-footer">
-  
-    © 2019 人望山，鱼窥荷 - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
-  
+    </div>
 </div>
 
-      
-        </div>
-      
     </div>
-  </div>
-  <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-
-  <link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
-  <link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
-
-  <!-- Root element of PhotoSwipe. Must have class pswp. -->
-  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe.
-             It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-      <!-- Container that holds slides.
-                PhotoSwipe keeps only 3 of them in the DOM to save memory.
-                Don't modify these 3 pswp__item elements, data is added later on. -->
-      <div class="pswp__container">
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-      </div>
-
-      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-      <div class="pswp__ui pswp__ui--hidden">
-
-        <div class="pswp__top-bar">
-
-          <!--  Controls are self-explanatory. Order can be changed. -->
-
-          <div class="pswp__counter"></div>
-
-          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-          <button class="pswp__button pswp__button--share" title="Share"></button>
-
-          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-          <!-- element will get class pswp__preloader--active when preloader is running -->
-          <div class="pswp__preloader">
-            <div class="pswp__preloader__icn">
-              <div class="pswp__preloader__cut">
-                <div class="pswp__preloader__donut"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-          <div class="pswp__share-tooltip"></div>
-        </div>
-
-        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-
-        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-
-        <div class="pswp__caption">
-          <div class="pswp__caption__center"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="/PhotoSwipe/photoswipe.js"></script>
-  <script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+</div>
 
 
-<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
-<script src="/scripts/main.js"></script>
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
 
 </body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
 </html>

@@ -1,166 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="对未知的事物一直保持敬畏之心">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
+    <title>
+        
+        模拟实现render&amp;&amp;setState方法 - undefined
+        
+    </title>
 
-
-<title>
-  
-    模拟实现render&amp;&amp;setState方法
-  
-</title>
-
-<meta name="description" content="模拟实现React的render以及setState方法这一章的主要目标是模拟实现React的render以及setState更新state后刷新DOM的实现，看到这里你需要一点点ES6的基础，如果这里你还不是很会，推荐一下阮一峰老师的ES6教程写的特别好。 目标 模拟实现React的render方法动态的生成Dom元素  绑定Dom节点上的函数  实现setState操作并且更新数据后运行Ren">
-<meta name="keywords" content="react">
-<meta property="og:type" content="article">
-<meta property="og:title" content="模拟实现render&amp;&amp;setState方法">
-<meta property="og:url" content="http://yoursite.com/2019/05/05/ApproachingReactTwo/index.html">
-<meta property="og:site_name" content="人望山，鱼窥荷">
-<meta property="og:description" content="模拟实现React的render以及setState方法这一章的主要目标是模拟实现React的render以及setState更新state后刷新DOM的实现，看到这里你需要一点点ES6的基础，如果这里你还不是很会，推荐一下阮一峰老师的ES6教程写的特别好。 目标 模拟实现React的render方法动态的生成Dom元素  绑定Dom节点上的函数  实现setState操作并且更新数据后运行Ren">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/05/05/ApproachingReactTwo/todoList2.gif">
-<meta property="og:updated_time" content="2019-05-06T03:02:33.162Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="模拟实现render&amp;&amp;setState方法">
-<meta name="twitter:description" content="模拟实现React的render以及setState方法这一章的主要目标是模拟实现React的render以及setState更新state后刷新DOM的实现，看到这里你需要一点点ES6的基础，如果这里你还不是很会，推荐一下阮一峰老师的ES6教程写的特别好。 目标 模拟实现React的render方法动态的生成Dom元素  绑定Dom节点上的函数  实现setState操作并且更新数据后运行Ren">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/05/ApproachingReactTwo/todoList2.gif">
-
-
-  <link rel="alternative" href="/atom.xml" title="人望山，鱼窥荷" type="application/atom+xml">
-
-
-
-  <link rel="icon" href="/img/favicon.ico">
-
-
-<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
-<link rel="stylesheet" href="/styles/main.css">
-
-
-
-
-
-
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
 </head>
-<body class="monochrome">
-  <div class="mobile-header">
-  <button class="sidebar-toggle" type="button">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
-  <a class="title" href="/">人望山，鱼窥荷</a>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
 </div>
 
-  <div class="main-container">
-    <div class="sidebar">
-  <div class="header">
-    <h1 class="title"><a href="/">人望山，鱼窥荷</a></h1>
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
     
-    <div class="info">
-      <div class="content">
+    <div class="index-left">
         
-          <div class="description">对未知的事物一直保持敬畏之心</div>
-        
-        
-          <div class="author">wilesen</div>
-        
-      </div>
-      
-        <div class="avatar">
-          
-            <a href="https://github.com/wilesen"><img src="https://avatars2.githubusercontent.com/u/24243167?s=460&amp;v=4"></a>
-          
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/">
         </div>
-      
+        <div class="name">
+            <i>wilesen</i>
+        </div>
     </div>
-  </div>
-  <div class="body">
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
     
-      
-        <ul class="nav">
-          
-            
-              <li class="category-list-container">
-                <a href="javascript:;">分类</a>
-                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javaScript/">javaScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a><span class="category-list-count">3</span></li></ul>
-              </li>
-            
-          
-            
-              <li class="tag-list-container">
-                <a href="javascript:;">标签</a>
-                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">3</span></li></ul>
-              </li>
-            
-          
-            
-              <li class="archive-list-container">
-                <a href="javascript:;">归档</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">7</span></li></ul>
-              </li>
-            
-          
-        </ul>
-      
-        <ul class="nav">
-          
-            
-              <li>
-                <a href="/" title="首页">首页</a>
-              </li>
-            
-          
-        </ul>
-      
-        <ul class="nav">
-          
-            
-              <li>
-                <a href="https://github.com/wilesen" title="Github" target="_blank" rel="noopener">Github</a>
-              </li>
-            
-          
-        </ul>
-      
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#模拟实现React的render以及setState方法"><span class="toc-text">模拟实现React的render以及setState方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#目标"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现方案"><span class="toc-text">实现方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步：抽离render方法-用于渲染DOM元素"><span class="toc-text">第一步：抽离render方法(用于渲染DOM元素)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步：解析属性并绑定对应函数"><span class="toc-text">第二步：解析属性并绑定对应函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三步：调用setState方法并触发Render方法重新渲染"><span class="toc-text">第三步：调用setState方法并触发Render方法重新渲染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完整的代码"><span class="toc-text">完整的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码抽离-amp-amp-优化"><span class="toc-text">代码抽离&amp;&amp;优化</span></a></li></ol></li></ol></li></ol>
+</div>
     
-  </div>
 </div>
 
-    <div class="main-content">
-      
-        <div style="max-width: 1000px">
-      
-          <article id="post-ApproachingReactTwo" class="article article-type-post">
-  
-    <h1 class="article-header">
-      模拟实现render&&setState方法
-    </h1>
-  
-  
 
-  <div class="article-info">
-    <span class="article-date">
-  2019-05-05
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        模拟实现render&amp;&amp;setState方法
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-05-05 17:10:52</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#react" title="react">react</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
 </span>
 
-    
-	<span class="article-category tagcloud">
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/react/">react</a></li></ul>
-	</span>
-
-
-    
-	<span class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-	</span>
-
-
-  </div>
-  <div class="article-entry">
-    <h1 id="模拟实现React的render以及setState方法"><a href="#模拟实现React的render以及setState方法" class="headerlink" title="模拟实现React的render以及setState方法"></a><strong>模拟实现React的render以及setState方法</strong></h1><p>这一章的主要目标是模拟实现React的render以及setState更新state后刷新DOM的实现，看到这里你需要一点点ES6的基础，如果这里你还不是很会，推荐一下阮一峰老师的<a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">ES6教程</a>写的特别好。</p>
+    </div>
+    <div class="post-content ">
+        <h1 id="模拟实现React的render以及setState方法"><a href="#模拟实现React的render以及setState方法" class="headerlink" title="模拟实现React的render以及setState方法"></a><strong>模拟实现React的render以及setState方法</strong></h1><p>这一章的主要目标是模拟实现React的render以及setState更新state后刷新DOM的实现，看到这里你需要一点点ES6的基础，如果这里你还不是很会，推荐一下阮一峰老师的<a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">ES6教程</a>写的特别好。</p>
 <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a><strong>目标</strong></h2><ul>
 <li><p>模拟实现React的render方法动态的生成Dom元素</p>
 </li>
@@ -193,119 +164,63 @@
 <p>JavaScript部分：<br><figure class="highlight plain"><figcaption><span>block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">function mountNode(counter, root)&#123;</span><br><span class="line">            (counter.$container = root).appendChild(counter.render());</span><br><span class="line">        &#125;</span><br><span class="line">        class  Counter&#123;</span><br><span class="line">            constructor()&#123;</span><br><span class="line">                this.state=&#123;</span><br><span class="line">                    dateList:[]</span><br><span class="line">                &#125;</span><br><span class="line">                this.add=this.add.bind(this);</span><br><span class="line">                this.reduce=this.reduce.bind(this);</span><br><span class="line">            &#125;</span><br><span class="line">            add()&#123;</span><br><span class="line">                let newDateList=[...this.state.dateList]</span><br><span class="line">                newDateList.push(new Date().toString());</span><br><span class="line">                this.setState(&#123;dateList:newDateList&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            reduce()&#123;</span><br><span class="line">                let newDateList=[...this.state.dateList]</span><br><span class="line">                newDateList.pop();</span><br><span class="line">                this.setState(&#123;dateList:newDateList&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            bindEvent(el)&#123;</span><br><span class="line">                el.getAttributeNames().forEach(name =&gt; &#123;</span><br><span class="line">                    const matches=name.match(/^on([a-z]+)$/);</span><br><span class="line">                    matches &amp;&amp; el.addEventListener(matches[1], new Function(&apos;return &apos; + el.getAttribute(name)).bind(this)(),false);</span><br><span class="line">                &#125;);</span><br><span class="line">                Array.from(el.children).forEach(el=&gt;this.bindEvent(el));</span><br><span class="line">                return el;</span><br><span class="line">            &#125;</span><br><span class="line">            setState(nextState)&#123;</span><br><span class="line">                this.state=&#123;...this.state,...nextState&#125;;</span><br><span class="line">                this.render();</span><br><span class="line">            &#125;</span><br><span class="line">            createDOM(htmlDom)&#123;</span><br><span class="line">                const fragment = document.createElement(&apos;div&apos;);</span><br><span class="line">                fragment.innerHTML = htmlDom; </span><br><span class="line">                return this.bindEvent(fragment.firstElementChild);</span><br><span class="line">            &#125;</span><br><span class="line">            render()&#123;</span><br><span class="line">                const &#123;dateList&#125;=this.state;</span><br><span class="line">                const oldElement=this.$element;</span><br><span class="line">                let color=&apos;blue&apos;;</span><br><span class="line">                if (dateList.length &gt;= 5) color = &apos;red&apos;;</span><br><span class="line">                if (dateList.length &lt;= 0) color = &apos;green&apos;;</span><br><span class="line">                this.$element = this.createDOM(`</span><br><span class="line">                    &lt;div&gt;  </span><br><span class="line">                        &lt;div style=&quot;color:$&#123;color&#125;&quot;&gt;当前List条数为 $&#123;dateList.length&#125;&lt;/div&gt;</span><br><span class="line">                        &lt;button onClick=&quot;this.add&quot;&gt;增加一条&lt;/button&gt;</span><br><span class="line">                        &lt;button onClick=&quot;this.reduce&quot;&gt;减少一条&lt;/button&gt;</span><br><span class="line">                        &lt;ul&gt;</span><br><span class="line">                            $&#123;</span><br><span class="line">                                dateList.map((item,index)=&gt;`&lt;li style=&quot;color:$&#123;color&#125;&quot;&gt;便签$&#123;index+1&#125; 时间是：$&#123;item&#125;&lt;/li&gt;`)</span><br><span class="line">                            &#125;</span><br><span class="line">                        &lt;/ul&gt;</span><br><span class="line">                    &lt;/div&gt;</span><br><span class="line">                `);</span><br><span class="line">                this.$container[oldElement ? &apos;replaceChild&apos; : &apos;appendChild&apos;](this.$element, oldElement);</span><br><span class="line">                return this.$element;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        mountNode(new Counter(),document.getElementById(&apos;root&apos;));</span><br></pre></td></tr></table></figure></p>
 <h3 id="代码抽离-amp-amp-优化"><a href="#代码抽离-amp-amp-优化" class="headerlink" title="代码抽离&amp;&amp;优化"></a><strong>代码抽离&amp;&amp;优化</strong></h3><p>看到这里可能，有一定抽象能力的客官可能会质疑了，《走近React的第一天》说好的代码抽离呢，你这也没有抽离啊！不就是简单的整合功能实现了一下功能吗，代码复用性还是不够啊？别别别，客官别急，咱们第三章会细细道来。<a href="https://github.com/wilesen/BlogProject" target="_blank" rel="noopener">示例源码</a></p>
 
-  </div>
-  <footer class="article-footer">
-    
-  <div class="cc">
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="署名-相同方式共享">
-      <img src="/images/cc/cc.png">
-      
-          <img src="/images/cc/by.png">
         
-          <img src="/images/cc/sa.png">
-      
-      <span>
-        本作品采用知识共享 署名-相同方式共享 4.0 国际许可协议进行许可。
-      </span>
-    </a>
-  </div>
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
 
+        <div id="lv-container">
+        </div>
 
-    
-
-  </footer>
-</article>
-
-
-
-
-
-
-
-          <div class="main-footer">
-  
-    © 2019 人望山，鱼窥荷 - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
-  
+    </div>
 </div>
 
-      
-        </div>
-      
     </div>
-  </div>
-  <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-
-  <link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
-  <link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
-
-  <!-- Root element of PhotoSwipe. Must have class pswp. -->
-  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe.
-             It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-      <!-- Container that holds slides.
-                PhotoSwipe keeps only 3 of them in the DOM to save memory.
-                Don't modify these 3 pswp__item elements, data is added later on. -->
-      <div class="pswp__container">
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-      </div>
-
-      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-      <div class="pswp__ui pswp__ui--hidden">
-
-        <div class="pswp__top-bar">
-
-          <!--  Controls are self-explanatory. Order can be changed. -->
-
-          <div class="pswp__counter"></div>
-
-          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-          <button class="pswp__button pswp__button--share" title="Share"></button>
-
-          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-          <!-- element will get class pswp__preloader--active when preloader is running -->
-          <div class="pswp__preloader">
-            <div class="pswp__preloader__icn">
-              <div class="pswp__preloader__cut">
-                <div class="pswp__preloader__donut"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-          <div class="pswp__share-tooltip"></div>
-        </div>
-
-        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-
-        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-
-        <div class="pswp__caption">
-          <div class="pswp__caption__center"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="/PhotoSwipe/photoswipe.js"></script>
-  <script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+</div>
 
 
-<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
-<script src="/scripts/main.js"></script>
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
 
 </body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
 </html>

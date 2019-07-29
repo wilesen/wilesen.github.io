@@ -1,166 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="对未知的事物一直保持敬畏之心">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
+    <title>
+        
+        走近React的第一天（一个简单的TodoList例子） - undefined
+        
+    </title>
 
-
-<title>
-  
-    走近React的第一天（一个简单的TodoList例子）
-  
-</title>
-
-<meta name="description" content="走近React的第一天（一个简单的TodoList例子）前言React.js是一个专注于构建视图层的JavaScript库，使用它你可以非常轻松地创建你需要的用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己跟React初学者进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考React中文">
-<meta name="keywords" content="react">
-<meta property="og:type" content="article">
-<meta property="og:title" content="走近React的第一天（一个简单的TodoList例子）">
-<meta property="og:url" content="http://yoursite.com/2019/04/28/ApproachingReactOne/index.html">
-<meta property="og:site_name" content="人望山，鱼窥荷">
-<meta property="og:description" content="走近React的第一天（一个简单的TodoList例子）前言React.js是一个专注于构建视图层的JavaScript库，使用它你可以非常轻松地创建你需要的用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己跟React初学者进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考React中文">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/04/28/ApproachingReactOne/toDoList.gif">
-<meta property="og:updated_time" content="2019-06-11T09:52:13.889Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="走近React的第一天（一个简单的TodoList例子）">
-<meta name="twitter:description" content="走近React的第一天（一个简单的TodoList例子）前言React.js是一个专注于构建视图层的JavaScript库，使用它你可以非常轻松地创建你需要的用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己跟React初学者进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考React中文">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/28/ApproachingReactOne/toDoList.gif">
-
-
-  <link rel="alternative" href="/atom.xml" title="人望山，鱼窥荷" type="application/atom+xml">
-
-
-
-  <link rel="icon" href="/img/favicon.ico">
-
-
-<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
-<link rel="stylesheet" href="/styles/main.css">
-
-
-
-
-
-
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
 </head>
-<body class="monochrome">
-  <div class="mobile-header">
-  <button class="sidebar-toggle" type="button">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
-  <a class="title" href="/">人望山，鱼窥荷</a>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
 </div>
 
-  <div class="main-container">
-    <div class="sidebar">
-  <div class="header">
-    <h1 class="title"><a href="/">人望山，鱼窥荷</a></h1>
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
     
-    <div class="info">
-      <div class="content">
+    <div class="index-left">
         
-          <div class="description">对未知的事物一直保持敬畏之心</div>
-        
-        
-          <div class="author">wilesen</div>
-        
-      </div>
-      
-        <div class="avatar">
-          
-            <a href="https://github.com/wilesen"><img src="https://avatars2.githubusercontent.com/u/24243167?s=460&amp;v=4"></a>
-          
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/">
         </div>
-      
+        <div class="name">
+            <i>wilesen</i>
+        </div>
     </div>
-  </div>
-  <div class="body">
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
     
-      
-        <ul class="nav">
-          
-            
-              <li class="category-list-container">
-                <a href="javascript:;">分类</a>
-                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javaScript/">javaScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a><span class="category-list-count">3</span></li></ul>
-              </li>
-            
-          
-            
-              <li class="tag-list-container">
-                <a href="javascript:;">标签</a>
-                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">3</span></li></ul>
-              </li>
-            
-          
-            
-              <li class="archive-list-container">
-                <a href="javascript:;">归档</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">7</span></li></ul>
-              </li>
-            
-          
-        </ul>
-      
-        <ul class="nav">
-          
-            
-              <li>
-                <a href="/" title="首页">首页</a>
-              </li>
-            
-          
-        </ul>
-      
-        <ul class="nav">
-          
-            
-              <li>
-                <a href="https://github.com/wilesen" title="Github" target="_blank" rel="noopener">Github</a>
-              </li>
-            
-          
-        </ul>
-      
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#走近React的第一天（一个简单的TodoList例子）"><span class="toc-text">走近React的第一天（一个简单的TodoList例子）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目标"><span class="toc-text">目标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#html部分"><span class="toc-text">html部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js部分"><span class="toc-text">js部分</span></a></li></ol></li></ol>
+</div>
     
-  </div>
 </div>
 
-    <div class="main-content">
-      
-        <div style="max-width: 1000px">
-      
-          <article id="post-ApproachingReactOne" class="article article-type-post">
-  
-    <h1 class="article-header">
-      走近React的第一天（一个简单的TodoList例子）
-    </h1>
-  
-  
 
-  <div class="article-info">
-    <span class="article-date">
-  2019-04-28
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        走近React的第一天（一个简单的TodoList例子）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-04-28 17:45:47</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#react" title="react">react</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
 </span>
 
-    
-	<span class="article-category tagcloud">
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/react/">react</a></li></ul>
-	</span>
-
-
-    
-	<span class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-	</span>
-
-
-  </div>
-  <div class="article-entry">
-    <h2 id="走近React的第一天（一个简单的TodoList例子）"><a href="#走近React的第一天（一个简单的TodoList例子）" class="headerlink" title="走近React的第一天（一个简单的TodoList例子）"></a>走近React的第一天（一个简单的TodoList例子）</h2><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>React.js是一个专注于构建视图层的JavaScript库，使用它你可以非常轻松地创建你需要的用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己跟React初学者进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考<a href="https://react.docschina.org/" target="_blank" rel="noopener">React中文网</a>,这里就不过多的赘述了。</p>
+    </div>
+    <div class="post-content ">
+        <h2 id="走近React的第一天（一个简单的TodoList例子）"><a href="#走近React的第一天（一个简单的TodoList例子）" class="headerlink" title="走近React的第一天（一个简单的TodoList例子）"></a>走近React的第一天（一个简单的TodoList例子）</h2><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>React.js是一个专注于构建视图层的JavaScript库，使用它你可以非常轻松地创建你需要的用户交互界面。为你应用的每一个状态设计简洁的视图，在数据改变时 React 也可以高效地更新渲染界面。本文仅仅只是帮组自己跟React初学者进一步的去理解学习React内部实现原理并记录的过程，对于React的具体学习教程可参考<a href="https://react.docschina.org/" target="_blank" rel="noopener">React中文网</a>,这里就不过多的赘述了。</p>
 <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>这一章的目标是实现一个动态增减列表的ToDoList实例。</p>
 <p><strong><center>先上效果图</center></strong><br><img src="/2019/04/28/ApproachingReactOne/toDoList.gif" alt="显示效果图"></p>
 <p>我相信有一定基础的前端coder对于实现这个效果都是顺手拈来的。</p>
@@ -171,119 +142,63 @@
 <p>功能和实现都很简单，到这里实例已经可以简单的实现List的增加和减少了。</p>
 <p>毫无疑问这样的代码可谓是言简意赅，很容易就能看懂每一段代码的具体目的，但是这样的代码在开发过程中的效率是很低的，没有什么复用性。如果这个时候PM过来找你说，’咱们现在不做ToDoList了，我们来做一个点赞评价模块‘，那么很不幸这块代码可能就需要全部推翻重写，对于咱们码农来说这样又平白无故的增加了不少工作量。那么我们能不能去把这些代码去抽离一下呢？客官别急，咱们后续慢慢看来！<a href="https://github.com/wilesen/BlogProject" target="_blank" rel="noopener">示例源码</a></p>
 
-  </div>
-  <footer class="article-footer">
-    
-  <div class="cc">
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="署名-相同方式共享">
-      <img src="/images/cc/cc.png">
-      
-          <img src="/images/cc/by.png">
         
-          <img src="/images/cc/sa.png">
-      
-      <span>
-        本作品采用知识共享 署名-相同方式共享 4.0 国际许可协议进行许可。
-      </span>
-    </a>
-  </div>
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
 
+        <div id="lv-container">
+        </div>
 
-    
-
-  </footer>
-</article>
-
-
-
-
-
-
-
-          <div class="main-footer">
-  
-    © 2019 人望山，鱼窥荷 - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
-  
+    </div>
 </div>
 
-      
-        </div>
-      
     </div>
-  </div>
-  <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-
-  <link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
-  <link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
-
-  <!-- Root element of PhotoSwipe. Must have class pswp. -->
-  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe.
-             It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-      <!-- Container that holds slides.
-                PhotoSwipe keeps only 3 of them in the DOM to save memory.
-                Don't modify these 3 pswp__item elements, data is added later on. -->
-      <div class="pswp__container">
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-      </div>
-
-      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-      <div class="pswp__ui pswp__ui--hidden">
-
-        <div class="pswp__top-bar">
-
-          <!--  Controls are self-explanatory. Order can be changed. -->
-
-          <div class="pswp__counter"></div>
-
-          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-          <button class="pswp__button pswp__button--share" title="Share"></button>
-
-          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-          <!-- element will get class pswp__preloader--active when preloader is running -->
-          <div class="pswp__preloader">
-            <div class="pswp__preloader__icn">
-              <div class="pswp__preloader__cut">
-                <div class="pswp__preloader__donut"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-          <div class="pswp__share-tooltip"></div>
-        </div>
-
-        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-
-        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-
-        <div class="pswp__caption">
-          <div class="pswp__caption__center"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="/PhotoSwipe/photoswipe.js"></script>
-  <script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+</div>
 
 
-<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
-<script src="/scripts/main.js"></script>
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
 
 </body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
 </html>
