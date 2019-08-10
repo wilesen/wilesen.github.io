@@ -11,7 +11,7 @@
 
     <title>
         
-        AutoSearch组件的实现 - undefined
+        前端优化之旅（前言） - 24小时在线学习
         
     </title>
 
@@ -45,7 +45,7 @@
 <div class="nav" id="nav">
     <div class="avatar-name">
         <div class="avatar ">
-            <img src="/">
+            <img src="/img/avatar.jpg">
         </div>
         <div class="name">
             <i>wilesen</i>
@@ -56,25 +56,32 @@
             <li>
                 <a href="/">
                     <i class="iconfont icon-shouye1"></i>
-                    <span>HOME</span>
+                    <span>主页</span>
                 </a>
             </li>
             <li>
                 <a href="/tags">
                     <i class="iconfont icon-biaoqian1"></i>
-                    <span>TAGS</span>
+                    <span>标签</span>
                 </a>
             </li>
             <li>
                 <a href="/archives">
                     <i class="iconfont icon-guidang2"></i>
-                    <span>ARCHIVES</span>
+                    <span>存档</span>
                 </a>
             </li>
             <li>
                 <a href="/about/">
                     <i class="iconfont icon-guanyu2"></i>
-                    <span>ABOUT</span>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
                 </a>
             </li>
             
@@ -82,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li></ol>
 </div>
     
 </div>
@@ -93,7 +100,7 @@
         <div class="search-input">
             <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
             <input id="search-input">
-            <span id="begin-search">search</span>
+            <span id="begin-search">搜索</span>
         </div>
         <div class="search-result-container" id="search-result-container">
 
@@ -113,19 +120,43 @@
 
 <div class="post-container">
     <div class="post-title">
-        AutoSearch组件的实现
+        前端优化之旅（前言）
     </div>
 
     <div class="post-meta">
-        <span class="attr">Post：<span>2019-04-25 14:29:49</span></span>
+        <span class="attr">发布于：<span>2019-08-10 16:49:07</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#前端优化" title="前端优化">前端优化</a>
+        <span>/</span>
         
         
-        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
 </span>
 
     </div>
     <div class="post-content ">
-        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>开始之前我先抛出一道最近很热门的前端面试题</p>
+<blockquote>
+<p>在浏览器的地址栏中输入了一个url地址以后发生什么？</p>
+</blockquote>
+<p>这是一道很基础，但是每个前端coder都必须要有所了解的问题，同时本文后续相关的内容也会围绕着这个题目延伸扩展下去。</p>
+<p><strong>答案：</strong></p>
+<blockquote>
+<p>通过DNS将URL地址解析成IP地址，然后通过IP地址进行TCP网络连接，随后向服务器抛出HTTP请求，服务端处理完请求后把数据放在HTTP响应里返回客户端，浏览器获取到响应后解析DOM请求相关的资源然后渲染，最后呈现给用户一个网页。</p>
+</blockquote>
+<p>大致上可以分化成以下几个阶段</p>
+<ul>
+<li>DNS解析</li>
+<li>TCP链接</li>
+<li>HTTP请求请求</li>
+<li>服务端响应,HTTP响应返回</li>
+<li>客服端拿到HTTP响应并且解析响应内容，呈现结果</li>
+</ul>
+<p>在这五个阶段都有很多值得去优化的地方，所以后续的内容我会从网络层面、渲染层面以及性能层面三个大方向对前端性能优化进行分析</p>
+
         
         <br>
         <div id="comment-container">
@@ -174,7 +205,7 @@
 
 <script>
     // We expose some of the variables needed by the front end
-    window.hexo_search_path = ""
+    window.hexo_search_path = "search.json"
     window.hexo_root = "/"
     window.isPost = true
 </script>
