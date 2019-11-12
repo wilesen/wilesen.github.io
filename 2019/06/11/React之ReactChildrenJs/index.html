@@ -145,7 +145,7 @@
 <p><img src="/2019/06/11/React之ReactChildrenJs/flow.png" alt="显示效果图"></p>
 <center> &lt;图1&gt; Rmap函数流程图</center>
 
-<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><p>本章主要以React.Chilren提供的map函数来分析ReactChildren.js文件。</p>
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><p>本章主要以React.Children提供的map函数来分析ReactChildren.js文件。</p>
 <h4 id="示例demo代码"><a href="#示例demo代码" class="headerlink" title="示例demo代码"></a>示例demo代码</h4><figure class="highlight plain"><figcaption><span>Block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 示例demo代码 --&gt;</span><br><span class="line">import React from &apos;react&apos;;</span><br><span class="line">function ReactChildrenDemo(props)&#123;</span><br><span class="line">    conosle.log(props.children);</span><br><span class="line">    console.log(React.Children.map(props.children),c=&gt;[c,[c,c]])</span><br><span class="line">    return props.children</span><br><span class="line">&#125;</span><br><span class="line">export default ()=&gt;(</span><br><span class="line">    &lt;ReactChildrenDemo&gt;</span><br><span class="line">        &lt;span&gt;demo1&lt;/span&gt;</span><br><span class="line">        &lt;span&gt;demo1&lt;/span&gt;</span><br><span class="line">    &lt;/ReactChildrenDemo&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><figcaption><span>Block</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- ReactChildren.js --&gt;</span><br><span class="line">export &#123;</span><br><span class="line">  forEachChildren as forEach,</span><br><span class="line">  mapChildren as map,</span><br><span class="line">  countChildren as count,</span><br><span class="line">  onlyChild as only,</span><br><span class="line">  toArray,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
@@ -157,7 +157,7 @@
 <ul>
 <li>如果当前组件没有子节点，它就是undefined;</li>
 <li>如果有一个子节点，数据类型是Object;</li>
-<li>如果有多个子节点，数据类型就是array;</li>
+<li>如果有多个子节点，数据类型就是array(Ps:通过typeof显示仍然为object);</li>
 </ul>
 </li>
 <li><p>只有传递进来的children不为null的时候才会进入到mapIntoWithKeyPrefixInternal函数内</p>
